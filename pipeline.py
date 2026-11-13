@@ -11,6 +11,7 @@ import shutil
 import time
 
 MODEL_ID = 'Qwen/Qwen2.5-0.5B-Instruct'
+MODEL_REVISION = '7ae557604adf67be50417f59c2c2f167def9a775'
 SEED = 2026
 
 
@@ -166,7 +167,7 @@ def measure(gold, predictions, path):
     return result
 
 
-def train_run(config, raw, clean, dev, tokenizer, max_length, revision, out):
+def train_run(config, raw, clean, dev, tokenizer, max_length, revision, out, eval_batch_size=8):
     import torch
     from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
     from transformers import Trainer, TrainingArguments, set_seed
@@ -216,7 +217,7 @@ def train_run(config, raw, clean, dev, tokenizer, max_length, revision, out):
     # Drop optimizer and Trainer allocations before autoregressive inference.
     del trainer
     free_gpu()
-    predictions = predict(model,tokenizer,dev,run_dir/'predictions_dev.jsonl')
+    predictions = predict(model,tokenizer,dev,run_dir/'predictions_dev.jsonl',batch_size=eval_batch_size)
     scores = measure(dev,predictions,run_dir/'scores.json')
     result = {'config':asdict(config), 'train_rows':len(data), 'trainable_parameters':trainable,
               'peak_gpu_gib':peak_allocated, 'peak_reserved_gib':peak_reserved,
@@ -246,7 +247,7 @@ def main(data_dir, out_dir, matrix=True, final_config=None):
     test = load_rows(data/'test_inputs.jsonl')
     assert len(dev)==200 and len(test)==400
     revision_file = out/'model_revision.txt'
-    revision = revision_file.read_text().strip() if revision_file.exists() else model_info(MODEL_ID).sha
+    revision = revision_file.read_text().strip() if revision_file.exists() else MODEL_REVISION
     revision_file.write_text(revision+'\n')
     tokenizer = load_tokenizer(revision)
     max_length = length_audit(raw,tokenizer,out)

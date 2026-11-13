@@ -1,9 +1,13 @@
 # NimbusPay ticket triage
 
-Base model: `Qwen/Qwen2.5-0.5B-Instruct` (494M parameters).
+Base model: `Qwen/Qwen2.5-0.5B-Instruct`
 
-The experiment matrix compares 4-bit QLoRA and 16-bit LoRA. Final loading mode and best score will be populated from measured results after the T4 runs finish.
+Pinned revision: `7ae557604adf67be50417f59c2c2f167def9a775`
 
-The training-only audit retains 1,350 of 1,445 rows: 95 drops and 175 repairs. See `cleaning_log.csv` and `audit.py`.
+Final base loaded in 4-bit: **True**
 
-Open `notebook.ipynb` in a free Colab T4 runtime. Upload the original private `candidate_data.zip` when prompted. The notebook includes both baselines, five runs forming four controlled comparisons, dev scoring, final PEFT export, and unmodified model test outputs. Training data and base model weights are excluded from this repository.
+Best run `clean_qlora`: dev exact match **58.5%**, mean field accuracy **92.6%**.
+
+Open notebook.ipynb in a free Colab T4 runtime. Upload the original candidate_data.zip when requested; the training data and base weights are intentionally excluded from Git. Read report.pdf for methods and measured experiments. Source modules are embedded in the notebook and also provided as .py files for inspection. The final package missed the 9 pm IST deadline on 13 November 2026; any final upload is a late submission. The initial foundation commit was made before the deadline.
+
+Data credit: some ticket text is adapted from Banking77 (PolyAI, CC-BY-4.0), as credited in the supplied assignment. The task, categories and labels differ from Banking77. Training data is excluded from this repository.
