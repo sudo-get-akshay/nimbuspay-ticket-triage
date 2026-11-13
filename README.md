@@ -8,6 +8,6 @@ Final base loaded in 4-bit: **True**
 
 Best run `clean_qlora`: dev exact match **58.5%**, mean field accuracy **92.6%**.
 
-Open notebook.ipynb in a free Colab T4 runtime. Upload the original candidate_data.zip when requested; the training data and base weights are intentionally excluded from Git. Read report.pdf for methods and measured experiments. Source modules are embedded in the notebook and also provided as .py files for inspection. The final package missed the 9 pm IST deadline on 13 November 2026; any final upload is a late submission. The initial foundation commit was made before the deadline.
+Open notebook.ipynb in a free Colab T4 runtime. Upload the original candidate_data.zip when requested; the training data and base weights are intentionally excluded from Git. Read report.pdf for methods and measured experiments. Source modules are embedded in the notebook and also provided as .py files for inspection.
 
 Data credit: some ticket text is adapted from Banking77 (PolyAI, CC-BY-4.0), as credited in the supplied assignment. The task, categories and labels differ from Banking77. Training data is excluded from this repository.
