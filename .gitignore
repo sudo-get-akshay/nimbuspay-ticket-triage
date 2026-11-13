@@ -1,0 +1,14 @@
+data/
+artifacts/train_clean.jsonl
+artifacts/cleaning_evidence.json
+artifacts/audit_review.json
+*.zip
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+base_model/
+hf_cache/
+**/checkpoints/
+train_sentences.txt
+inspect_train.py
+submission_bundle/
